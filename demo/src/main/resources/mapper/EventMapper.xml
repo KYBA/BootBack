@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.EventMapper">
+
+    <select id="getTotal" resultType="Integer" parameterType="string">
+        select count(*) from events e left join activities a on e.activity_id =a.activity_id left join locations l on e.location_id =l.location_id
+        where 1=1
+        <if test="category != null and category != '' and category != 'All'">
+			AND (a.activity_type = #{category} or a.activity_semi_type =#{category})
+		</if>
+        <if test="location != null and location != ''">
+			AND l.suburb=#{location}
+		</if>
+        <if test="time != null and time != ''">
+            <if test="time == 'Morning'">
+			    AND e.event_start_time_24hr &lt; '12:00:00'
+		    </if>
+            <if test="time == 'Afternoon'">
+			    AND e.event_end_time_24hr &gt; '12:00:00' and e.event_start_time_24hr &lt; '18:00:00'
+
+		    </if>
+            <if test="time == 'Morning'">
+			    AND e.event_end_time_24hr &gt; '18:00:00'
+		    </if>
+        </if>
+         
+    </select>
+
+    <select id="getList" resultType="com.example.demo.entity.resp.Event" parameterType="string">
+        select e.event_id,e.event_name,e.event_date ,e.event_start_time_24hr ,e.event_end_time_24hr ,e.event_image_path ,l.location_name,l.address_1 ,l.street ,l.suburb ,l.city 
+         from events e left join activities a on e.activity_id =a.activity_id left join locations l on e.location_id =l.location_id
+        where 1=1
+        <if test="category != null and category != '' and category != 'All'">
+			AND (a.activity_type = #{category} or a.activity_semi_type =#{category})
+		</if>
+        <if test="location != null and location != ''">
+			AND l.suburb=#{location}
+		</if>
+        <if test="time != null and time != ''">
+            <if test="time == 'Morning'">
+			    AND e.event_start_time_24hr &lt; '12:00:00'
+		    </if>
+            <if test="time == 'Afternoon'">
+			    AND e.event_end_time_24hr &gt; '12:00:00' and e.event_start_time_24hr &lt; '18:00:00'
+
+		    </if>
+            <if test="time == 'Evening'">
+			    AND e.event_end_time_24hr &gt; '18:00:00'
+		    </if>
+        </if>
+        order by e.event_id desc limit #{start},#{pageSize}
+         
+    </select>
+    <!-- <select id="selectByParentId" resultType="com.mall.weapp.model.entity.Category" parameterType="Integer">
+        select c.id, c.name, c.level, c.sort, c.image_url from category c
+        where (c.parent_id = #{parentId})
+    </select> -->
+
+</mapper>
