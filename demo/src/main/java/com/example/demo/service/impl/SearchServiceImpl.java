@@ -22,9 +22,9 @@ public class SearchServiceImpl implements SearchService {
         int total = eventMapper.getTotal(category, location, time);
         result.setTotal(Long.valueOf(total));
         if (total % pageSize == 0) {
-            result.setTotalPage(Long.valueOf(total % pageSize));
+            result.setTotalPage(Long.valueOf(total / pageSize));
         } else {
-            result.setTotalPage(Long.valueOf(total % pageSize + 1));
+            result.setTotalPage(Long.valueOf(total / pageSize + 1));
         }
         List<Event> list = eventMapper.getList(category, location, time, (pageNum - 1) * pageSize, pageSize);
         result.setList(list);

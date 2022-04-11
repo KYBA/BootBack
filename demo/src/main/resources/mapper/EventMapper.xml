@@ -21,7 +21,7 @@
 			    AND e.event_end_time_24hr &gt; '12:00:00' and e.event_start_time_24hr &lt; '18:00:00'
 
 		    </if>
-            <if test="time == 'Morning'">
+            <if test="time == 'Evening'">
 			    AND e.event_end_time_24hr &gt; '18:00:00'
 		    </if>
         </if>
