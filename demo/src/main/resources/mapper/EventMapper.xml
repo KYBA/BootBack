@@ -18,11 +18,11 @@
 			    AND e.event_start_time_24hr &lt; '12:00:00'
 		    </if>
             <if test="time == 'Afternoon'">
-			    AND e.event_end_time_24hr &gt; '12:00:00' and e.event_start_time_24hr &lt; '18:00:00'
+			    AND e.event_start_time_24hr &gt; '12:00:00' and e.event_start_time_24hr &lt; '18:00:00'
 
 		    </if>
             <if test="time == 'Evening'">
-			    AND e.event_end_time_24hr &gt; '18:00:00'
+			    AND e.event_start_time_24hr &gt; '18:00:00'
 		    </if>
         </if>
          
@@ -43,11 +43,11 @@
 			    AND e.event_start_time_24hr &lt; '12:00:00'
 		    </if>
             <if test="time == 'Afternoon'">
-			    AND e.event_end_time_24hr &gt; '12:00:00' and e.event_start_time_24hr &lt; '18:00:00'
+			    AND e.event_start_time_24hr &gt; '12:00:00' and e.event_start_time_24hr &lt; '18:00:00'
 
 		    </if>
             <if test="time == 'Evening'">
-			    AND e.event_end_time_24hr &gt; '18:00:00'
+			    AND e.event_start_time_24hr &gt; '18:00:00'
 		    </if>
         </if>
         order by e.event_id desc limit #{start},#{pageSize}
