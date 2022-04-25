@@ -1,7 +1,9 @@
 package com.example.demo.common;
 
 import java.util.List;
-import com.example.demo.entity.resp.Event;
+
+import com.example.demo.entity.resp.CharityVO;
+//import com.example.demo.entity.resp.Event;
 
 import lombok.Data;
 
@@ -26,7 +28,7 @@ public class CommonPage {
     /**
      * 分页数据
      */
-    private List<Event> list;
+    private List<CharityVO> list;
 
     public Long getPageNum() {
         return pageNum;
@@ -60,11 +62,11 @@ public class CommonPage {
         this.total = total;
     }
 
-    public List<Event> getList() {
+    public List<CharityVO> getList() {
         return list;
     }
 
-    public void setList(List<Event> list) {
+    public void setList(List<CharityVO> list) {
         this.list = list;
     }
 

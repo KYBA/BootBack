@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.CharityMapper">
+
+    <select id="getTotal" resultType="Integer" parameterType="string">
+        select count(distinct c.charity_id) from charities c left join  charities_states cs on c.charity_id =cs.charity_id left join states s on cs.state_id =s.state_id 
+        where 1=1 
+        <if test="keyword != null and keyword != ''">
+			and c.charity_name  like #{keyword}
+		</if>
+        <if test="size != null and size != '' and size != 'All'">
+			and c.charity_size = #{size}
+		</if>
+        <if test="state != null and state != '' and state != 'All'">
+			and s.state_name =#{state}
+		</if>
+        <if test="yearLevel != null and yearLevel != '' and yearLevel != 'All'">
+            <if test="yearLevel == '0-5'">
+			    and c.charity_age &lt;= 5
+		    </if>
+            <if test="yearLevel == '5-10'">
+			    AND c.charity_age &gt; 5 and c.charity_age &lt;= 10
+		    </if>
+            <if test="yearLevel == '10-20'">
+			    AND c.charity_age &gt; 10 and c.charity_age &lt;= 20
+		    </if>
+            <if test="yearLevel == '20+'">
+			    AND c.charity_age &gt; 20
+		    </if>
+        </if>
+         
+    </select>
+
+    <select id="getList" resultType="com.example.demo.entity.resp.CharityVO" parameterType="string">
+        select distinct c.charity_id ,c.charity_name ,c.charity_size ,c.charity_website ,c.charity_age from charities c left join  charities_states cs on c.charity_id =cs.charity_id left join states s on cs.state_id =s.state_id 
+        where 1=1 
+        <if test="keyword != null and keyword != ''">
+			and c.charity_name  like #{keyword}
+		</if>
+        <if test="size != null and size != '' and size != 'All'">
+			and c.charity_size = #{size}
+		</if>
+        <if test="state != null and state != '' and state != 'All'">
+			and s.state_name =#{state}
+		</if>
+        <if test="yearLevel != null and yearLevel != '' and yearLevel != 'All'">
+            <if test="yearLevel == '0-5'">
+			    and c.charity_age &lt;= 5
+		    </if>
+            <if test="yearLevel == '5-10'">
+			    AND c.charity_age &gt; 5 and c.charity_age &lt;= 10
+		    </if>
+            <if test="yearLevel == '10-20'">
+			    AND c.charity_age &gt; 10 and c.charity_age &lt;= 20
+		    </if>
+            <if test="yearLevel == '20+'">
+			    AND c.charity_age &gt; 20
+		    </if>
+        </if>
+        order by c.charity_id limit #{start},#{pageSize}
+         
+    </select>
+    <select id="getStateByCharity" resultType="java.lang.String" parameterType="Long">
+        select s.state_name from charities_states cs  left join states s on cs.state_id =s.state_id 
+        where cs.charity_id = #{charityId}
+    </select>
+
+</mapper>
