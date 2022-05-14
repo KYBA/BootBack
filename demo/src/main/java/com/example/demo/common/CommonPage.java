@@ -3,7 +3,7 @@ package com.example.demo.common;
 import java.util.List;
 
 import com.example.demo.entity.resp.CharityVO;
-//import com.example.demo.entity.resp.Event;
+import com.example.demo.entity.resp.Event;
 
 import lombok.Data;
 

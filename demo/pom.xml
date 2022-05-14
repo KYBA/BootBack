@@ -89,10 +89,10 @@
         <configuration> 
           <schemaVersion>v2</schemaVersion>  
           <subscriptionId>6a3bc12f-7208-4429-8338-bb2231555231</subscriptionId>  
-          <resourceGroup>TA28_group</resourceGroup>  
-          <appName>ta28-bootback</appName>  
+          <resourceGroup>TA28Chario</resourceGroup>  
+          <appName>chario-web</appName>  
           <pricingTier>P1v2</pricingTier>  
-          <region>centralus</region>  
+          <region>eastasia</region>  
           <runtime> 
             <os>Linux</os>  
             <javaVersion>Java 8</javaVersion>  
